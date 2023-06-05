@@ -92,7 +92,7 @@ class TestPDFO(TestCase):
             opt_problem, "PDFO_COBYLA", algo_type="opt", **algo_options
         )
 
-        obj_history = opt_problem.database.get_func_history("rosen")
+        obj_history = opt_problem.database.get_function_history("rosen")
 
         is_nan = any(isnan(obj_history))
         assert is_nan
@@ -126,7 +126,7 @@ class TestPDFO(TestCase):
             opt_problem, "PDFO_COBYLA", algo_type="opt", **algo_options
         )
 
-        obj_history = opt_problem.database.get_func_history("rosen")
+        obj_history = opt_problem.database.get_function_history("rosen")
 
         is_nan = any(isnan(obj_history))
         assert is_nan
