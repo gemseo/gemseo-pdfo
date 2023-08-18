@@ -1,0 +1,13 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 90744e9
+_src_path: /home/ad/gemseo-copier
+author_email: contact@gemseo.org
+author_name: GEMSEO developers
+gemseo_min_version: '5'
+package_is_a_gemseo_plugin: true
+project_is_open_source: true
+project_name: gemseo-pdfo
+project_name_suffix: pdfo
+project_slug: gemseo_pdfo
+short_description: PDFO wrapper for GEMSEO
+use_gemseo_develop: true
