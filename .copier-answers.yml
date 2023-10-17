@@ -1,6 +1,6 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_commit: 90744e9
-_src_path: /home/ad/gemseo-copier
+_commit: 9baf19a
+_src_path: https://gitlab.com/gemseo/dev/copier-gemseo
 author_email: contact@gemseo.org
 author_name: GEMSEO developers
 gemseo_min_version: '5'
