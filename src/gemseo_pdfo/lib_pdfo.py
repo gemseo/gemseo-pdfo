@@ -21,18 +21,22 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 from typing import Any
+from typing import ClassVar
 from typing import Optional
 from typing import Union
 
 from gemseo.algos.opt.optimization_library import OptimizationAlgorithmDescription
 from gemseo.algos.opt.optimization_library import OptimizationLibrary
-from gemseo.algos.opt_result import OptimizationResult
 from numpy import inf
 from numpy import isfinite
 from numpy import ndarray
 from numpy import real
 from pdfo import pdfo
+
+if TYPE_CHECKING:
+    from gemseo.algos.opt_result import OptimizationResult
 
 OptionType = Optional[Union[str, int, float, bool, ndarray]]
 
@@ -53,7 +57,7 @@ class PDFOOpt(OptimizationLibrary):
 
     LIB_COMPUTE_GRAD = False
 
-    OPTIONS_MAP = {
+    OPTIONS_MAP: ClassVar[dict[str, str]] = {
         OptimizationLibrary.MAX_ITER: "max_iter",
     }
 
@@ -135,7 +139,8 @@ class PDFOOpt(OptimizationLibrary):
             max_iter: The maximum number of iterations.
             rhoend: The final value of the trust region radius. Indicates
                 the accuracy required in the final values of the variables.
-            maxfev:  The upper bound of the number of calls of the objective function `fun`.
+            maxfev:  The upper bound of the number of calls of the objective function
+                `fun`.
             ftarget: The target value of the objective function. If a feasible
                 iterate achieves an objective function value lower or equal to
                 `options['ftarget']`, the algorithm stops immediately.
@@ -143,7 +148,8 @@ class PDFOOpt(OptimizationLibrary):
                 the bound constraints.
             quiet: The flag of quietness of the interface. If True,
                 the output message will not be printed.
-            classical: The flag indicating whether to call the classical Powell code or not.
+            classical: The flag indicating whether to call the classical Powell code
+                or not.
             debug: The debugging flag.
             chkfunval: A flag used when debugging. If both `options['debug']`
                 and `options['chkfunval']` are True, an extra function/constraint
@@ -155,7 +161,7 @@ class PDFOOpt(OptimizationLibrary):
             **kwargs: The other algorithm's options.
         """
         nds = normalize_design_space
-        popts = self._process_options(
+        return self._process_options(
             ftol_rel=ftol_rel,
             ftol_abs=ftol_abs,
             xtol_rel=xtol_rel,
@@ -174,7 +180,6 @@ class PDFOOpt(OptimizationLibrary):
             normalize_design_space=nds,
             **kwargs,
         )
-        return popts
 
     def _run(self, **options: OptionType) -> OptimizationResult:
         """Run the algorithm, to be overloaded by subclasses.
