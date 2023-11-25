@@ -18,6 +18,7 @@
 #        :author: Jean-Christophe Giret
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
 """PDFO optimization library wrapper, see `PDFO website <https://www.pdfo.net/>`_."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
