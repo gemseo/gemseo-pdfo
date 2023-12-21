@@ -31,11 +31,12 @@ from gemseo.algos.opt_problem import OptimizationProblem
 from gemseo.core.mdofunctions.mdo_function import MDOFunction
 from gemseo.problems.analytical.rosenbrock import Rosenbrock
 from gemseo.utils.testing.opt_lib_test_base import OptLibraryTestBase
-from gemseo_pdfo.lib_pdfo import PDFOOpt
 from numpy import isnan
 from numpy import nan
 from scipy.optimize import rosen
 from scipy.optimize import rosen_der
+
+from gemseo_pdfo.lib_pdfo import PDFOOpt
 
 pytest.importorskip("pdfo", reason="pdfo is not available")
 
@@ -80,8 +81,7 @@ class TestPDFO(TestCase):
 
             if d < 0.05:
                 return nan
-            else:
-                return fun(x_vec)
+            return fun(x_vec)
 
         opt_problem.objective._func = wrapped_fun
         opt_problem.stop_if_nan = False
@@ -112,10 +112,9 @@ class TestPDFO(TestCase):
         def wrapped_fun(x_vec):
             x = x_vec[0]
 
-            if 0.7 < x:
+            if x > 0.7:
                 return nan
-            else:
-                return fun(x_vec)
+            return fun(x_vec)
 
         opt_problem.objective._func = wrapped_fun
         opt_problem.stop_if_nan = False
@@ -168,8 +167,7 @@ def get_pb_options(pb_name):
     """
     if pb_name == "Power2":
         return {"initial_value": 0.0}
-    else:
-        return {}
+    return {}
 
 
 suite_tests = OptLibraryTestBase()
