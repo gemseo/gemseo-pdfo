@@ -54,7 +54,7 @@ pkginfo==1.10.0
     # via twine
 pycparser==2.21
     # via cffi
-pydantic==2.6.3
+pydantic==2.6.4
     # via check-wheel-contents
 pydantic-core==2.16.3
     # via pydantic
