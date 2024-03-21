@@ -29,7 +29,7 @@ fastjsonschema==2.19.1
     # via gemseo
 fonttools==4.50.0
     # via matplotlib
-gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@8679e78684ebe18a5c6c5932f124c9b0c9ed97a3
+gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@c95893f7e9a71698b96418ba31220d8a840bf368
 genson==1.2.2
     # via gemseo
 graphviz==0.20.1
@@ -134,7 +134,7 @@ sympy==1.12
     # via gemseo
 tenacity==8.2.3
     # via plotly
-threadpoolctl==3.3.0
+threadpoolctl==3.4.0
     # via scikit-learn
 tomli==2.0.1
     # via
