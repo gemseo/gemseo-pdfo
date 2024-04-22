@@ -25,11 +25,11 @@ from unittest import TestCase
 import pytest
 from gemseo import execute_algo
 from gemseo.algos.design_space import DesignSpace
-from gemseo.algos.opt.opt_factory import OptimizersFactory
+from gemseo.algos.opt.factory import OptimizationLibraryFactory
 from gemseo.algos.opt.optimization_library import OptimizationLibrary as OptLib
 from gemseo.algos.opt_problem import OptimizationProblem
 from gemseo.core.mdofunctions.mdo_function import MDOFunction
-from gemseo.problems.analytical.rosenbrock import Rosenbrock
+from gemseo.problems.optimization.rosenbrock import Rosenbrock
 from gemseo.utils.testing.opt_lib_test_base import OptLibraryTestBase
 from numpy import isnan
 from numpy import nan
@@ -46,7 +46,7 @@ class TestPDFO(TestCase):
 
     def test_init(self):
         """Tests the initialization of the problem."""
-        factory = OptimizersFactory()
+        factory = OptimizationLibraryFactory()
         if factory.is_available(self.OPT_LIB_NAME):
             factory.create(self.OPT_LIB_NAME)
 
@@ -139,7 +139,9 @@ class TestPDFO(TestCase):
             )
             problem = OptimizationProblem(design_space)
             problem.objective = MDOFunction(rosen, "Rosenbrock", "obj", rosen_der)
-            res = OptimizersFactory().execute(problem, "PDFO_COBYLA", **algo_options)
+            res = OptimizationLibraryFactory().execute(
+                problem, "PDFO_COBYLA", **algo_options
+            )
             return res, problem
 
         for tol_name in (
