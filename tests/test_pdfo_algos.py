@@ -27,7 +27,7 @@ from gemseo import execute_algo
 from gemseo.algos.design_space import DesignSpace
 from gemseo.algos.opt.factory import OptimizationLibraryFactory
 from gemseo.algos.opt.optimization_library import OptimizationLibrary as OptLib
-from gemseo.algos.opt_problem import OptimizationProblem
+from gemseo.algos.optimization_problem import OptimizationProblem
 from gemseo.core.mdofunctions.mdo_function import MDOFunction
 from gemseo.problems.optimization.rosenbrock import Rosenbrock
 from gemseo.utils.testing.opt_lib_test_base import OptLibraryTestBase
