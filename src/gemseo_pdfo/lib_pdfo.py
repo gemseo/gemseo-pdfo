@@ -83,16 +83,7 @@ class PDFOOpt(BaseOptimizationLibrary):
         ),
     }
 
-    def __init__(self, algo_name: str) -> None:
-        """Constructor.
-
-        Generate the library dict, contains the list
-        of algorithms with their characteristics:
-
-        - does it require gradient
-        - does it handle equality constraints
-        - does it handle inequality constraints
-        """
+    def __init__(self, algo_name: str) -> None:  # noqa: D107
         super().__init__(algo_name)
         self.name = "PDFO"
 
