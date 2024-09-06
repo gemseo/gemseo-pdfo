@@ -17,19 +17,21 @@
 #                           documentation
 #        :author: Jean-Christophe Giret
 #    OTHER AUTHORS   - MACROSCOPIC CHANGES
-"""PDFO optimization library wrapper, see `PDFO website <https://www.pdfo.net/>`_."""
+"""PDFO optimization library wrapper, see the [PDFO website](https://www.pdfo.net)."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 from typing import Any
+from typing import Callable
 from typing import ClassVar
 from typing import Optional
 from typing import Union
 
-from gemseo.algos.opt.optimization_library import OptimizationAlgorithmDescription
-from gemseo.algos.opt.optimization_library import OptimizationLibrary
+from gemseo.algos.design_space_utils import get_value_and_bounds
+from gemseo.algos.opt.base_optimization_library import BaseOptimizationLibrary
+from gemseo.algos.opt.base_optimization_library import OptimizationAlgorithmDescription
 from numpy import inf
 from numpy import isfinite
 from numpy import ndarray
@@ -37,7 +39,8 @@ from numpy import real
 from pdfo import pdfo
 
 if TYPE_CHECKING:
-    from gemseo.algos.opt_result import OptimizationResult
+    from gemseo.algos.optimization_problem import OptimizationProblem
+    from gemseo.algos.optimization_result import OptimizationResult
 
 OptionType = Optional[Union[str, int, float, bool, ndarray]]
 
@@ -50,21 +53,37 @@ class PDFOAlgorithmDescription(OptimizationAlgorithmDescription):
     website: str = "https://www.pdfo.net/"
 
 
-class PDFOOpt(OptimizationLibrary):
+class PDFOOpt(BaseOptimizationLibrary):
     """PDFO optimization library interface.
 
     See OptimizationLibrary.
     """
 
     LIB_COMPUTE_GRAD = False
-
-    OPTIONS_MAP: ClassVar[dict[str, str]] = {
-        OptimizationLibrary.MAX_ITER: "max_iter",
-    }
-
     LIBRARY_NAME = "PDFO"
 
-    def __init__(self) -> None:
+    ALGORITHM_INFOS: ClassVar[dict[str, Any]] = {
+        "PDFO_COBYLA": PDFOAlgorithmDescription(
+            algorithm_name="COBYLA",
+            description="Constrained Optimization By Linear Approximations ",
+            handle_equality_constraints=True,
+            handle_inequality_constraints=True,
+            internal_algorithm_name="cobyla",
+            positive_constraints=True,
+        ),
+        "PDFO_BOBYQA": PDFOAlgorithmDescription(
+            algorithm_name="BOBYQA",
+            description="Bound Optimization By Quadratic Approximation",
+            internal_algorithm_name="bobyqa",
+        ),
+        "PDFO_NEWUOA": PDFOAlgorithmDescription(
+            algorithm_name="NEWUOA",
+            description="NEWUOA",
+            internal_algorithm_name="newuoa",
+        ),
+    }
+
+    def __init__(self, algo_name: str) -> None:
         """Constructor.
 
         Generate the library dict, contains the list
@@ -74,27 +93,7 @@ class PDFOOpt(OptimizationLibrary):
         - does it handle equality constraints
         - does it handle inequality constraints
         """
-        super().__init__()
-        self.descriptions = {
-            "PDFO_COBYLA": PDFOAlgorithmDescription(
-                algorithm_name="COBYLA",
-                description="Constrained Optimization By Linear Approximations ",
-                handle_equality_constraints=True,
-                handle_inequality_constraints=True,
-                internal_algorithm_name="cobyla",
-                positive_constraints=True,
-            ),
-            "PDFO_BOBYQA": PDFOAlgorithmDescription(
-                algorithm_name="BOBYQA",
-                description="Bound Optimization By Quadratic Approximation",
-                internal_algorithm_name="bobyqa",
-            ),
-            "PDFO_NEWUOA": PDFOAlgorithmDescription(
-                algorithm_name="NEWUOA",
-                description="NEWUOA",
-                internal_algorithm_name="newuoa",
-            ),
-        }
+        super().__init__(algo_name)
         self.name = "PDFO"
 
     def _get_options(
@@ -120,7 +119,7 @@ class PDFOOpt(OptimizationLibrary):
         r"""Set the options default values.
 
         To get the best and up-to-date information about algorithms options,
-        go to pdfo documentation on the `PDFO website <https://www.pdfo.net/>`_.
+        go to pdfo documentation on the [PDFO website](https://www.pdfo.net/).
 
         Args:
             ftol_rel: A stop criteria, relative tolerance on the
@@ -161,7 +160,6 @@ class PDFOOpt(OptimizationLibrary):
             normalize_design_space: If True, normalize the design space.
             **kwargs: The other algorithm's options.
         """
-        nds = normalize_design_space
         return self._process_options(
             ftol_rel=ftol_rel,
             ftol_abs=ftol_abs,
@@ -178,11 +176,13 @@ class PDFOOpt(OptimizationLibrary):
             debug=debug,
             chkfunval=chkfunval,
             ensure_bounds=ensure_bounds,
-            normalize_design_space=nds,
+            normalize_design_space=normalize_design_space,
             **kwargs,
         )
 
-    def _run(self, **options: OptionType) -> OptimizationResult:
+    def _run(
+        self, problem: OptimizationProblem, **options: OptionType
+    ) -> OptimizationResult:
         """Run the algorithm, to be overloaded by subclasses.
 
         Args:
@@ -191,19 +191,36 @@ class PDFOOpt(OptimizationLibrary):
         Returns:
             The optimization result.
         """
-        # remove normalization from options for algo
-        normalize_ds = options.pop(self.NORMALIZE_DESIGN_SPACE_OPTION, True)
-
+        # Remove GEMSEO options to avoid passing them to the optimizer.
+        del options[self._X_TOL_ABS]
+        del options[self._X_TOL_REL]
+        del options[self._F_TOL_ABS]
+        del options[self._F_TOL_REL]
+        del options[self._MAX_TIME]
+        normalize_ds = options.pop(self._NORMALIZE_DESIGN_SPACE_OPTION, True)
         # Get the normalized bounds:
-        x_0, l_b, u_b = self.get_x0_and_bounds(normalize_ds)
-
-        # Ensure bounds
-        ensure_bounds = options["ensure_bounds"]
+        x_0, l_b, u_b = get_value_and_bounds(problem.design_space, normalize_ds)
 
         # Replace infinite values with None:
         l_b = [val if isfinite(val) else None for val in l_b]
         u_b = [val if isfinite(val) else None for val in u_b]
-        bounds = list(zip(l_b, u_b))
+
+        ensure_bounds = options.pop("ensure_bounds")
+
+        cstr_pdfo = []
+        for cstr in self._get_right_sign_constraints(problem):
+            c_pdfo = {"type": cstr.f_type}
+            if ensure_bounds:
+                c_pdfo["fun"] = self.__ensure_bounds(cstr.func, normalize_ds)
+            else:
+                c_pdfo["fun"] = cstr.func
+
+            cstr_pdfo.append(c_pdfo)
+
+        # |g| is in charge of ensuring max iterations, since it may
+        # have a different definition of iterations, such as for SLSQP
+        # for instance which counts duplicate calls to x as a new iteration
+        options["maxfev"] = int(options.pop(self._MAX_ITER) * 1.2)
 
         def real_part_fun(
             x: ndarray,
@@ -216,38 +233,43 @@ class PDFOOpt(OptimizationLibrary):
             Returns:
                 The real part of the evaluation of the function.
             """
-            return real(self.problem.objective.func(x))
+            return real(problem.objective.evaluate(x))
 
-        if ensure_bounds:
-            fun = self.ensure_bounds(real_part_fun, normalize_ds)
-        else:
-            fun = real_part_fun
-
-        constraints = self.get_right_sign_constraints()
-
-        cstr_scipy = []
-        for cstr in constraints:
-            c_scipy = {"type": cstr.f_type}
-            if ensure_bounds:
-                c_scipy["fun"] = self.ensure_bounds(cstr.func, normalize_ds)
-            else:
-                c_scipy["fun"] = cstr.func
-
-            cstr_scipy.append(c_scipy)
-
-        # |g| is in charge of ensuring max iterations, since it may
-        # have a different definition of iterations, such as for SLSQP
-        # for instance which counts duplicate calls to x as a new iteration
-        max_iter = options[self.MAX_ITER]
-        options["maxfev"] = int(max_iter * 1.2)
+        def ensure_bounds_fun(x_vect):
+            return real_part_fun(
+                self.problem.design_space.project_into_bounds(x_vect, normalize_ds)
+            )
 
         opt_result = pdfo(
-            fun=fun,
+            fun=ensure_bounds_fun if ensure_bounds else real_part_fun,
             x0=x_0,
-            method=self.internal_algo_name,
-            bounds=bounds,
-            constraints=cstr_scipy,
+            method=self.ALGORITHM_INFOS[self._algo_name].internal_algorithm_name,
+            bounds=list(zip(l_b, u_b)),
+            constraints=cstr_pdfo,
             options=options,
         )
 
-        return self.get_optimum_from_database(opt_result.message, opt_result.status)
+        return self._get_optimum_from_database(
+            problem, opt_result.message, opt_result.status
+        )
+
+    def __ensure_bounds(
+        self, orig_func: Callable[[ndarray], ndarray], normalize: bool = True
+    ) -> Callable[[ndarray], ndarray]:
+        """Project the design vector onto the design space before execution.
+
+        Args:
+            orig_func: The original function.
+            normalize: Whether to use the normalized design space.
+
+        Returns:
+            A function calling the original function
+            with the input data projected onto the design space.
+        """
+
+        def wrapped_func(x_vect):
+            return orig_func(
+                self.problem.design_space.project_into_bounds(x_vect, normalize)
+            )
+
+        return wrapped_func
