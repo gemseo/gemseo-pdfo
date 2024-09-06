@@ -120,7 +120,7 @@ mkdocs-autorefs==1.2.0
     #   mkdocstrings-python
 mkdocs-bibtex==2.16.2
     # via gemseo-pdfo (pyproject.toml)
-mkdocs-gallery==0.10.2
+mkdocs-gallery==0.10.3
     # via gemseo-pdfo (pyproject.toml)
 mkdocs-gen-files==0.5.0
     # via gemseo-pdfo (pyproject.toml)
