@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-pdfo/latest/reference/gemseo_pdfo/lib_pdfo/">
+        <link rel="canonical" href="https://gemseo.gitlab.io/gemseo-pdfo/latest/reference/gemseo_pdfo/settings/pdfo_bobyqa_settings/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../base_pdfo_settings/">
       
       
+        <link rel="next" href="../pdfo_cobyla_settings/">
       
-      <link rel="icon" href="../../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+      
+      <link rel="icon" href="../../../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
     
     
       
-        <title>Lib pdfo - gemseo-pdfo</title>
+        <title>Pdfo bobyqa settings - gemseo-pdfo</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.0253249f.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,21 +48,21 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+      <link rel="stylesheet" href="../../../../assets/_markdown_exec_pyodide.css">
     
-      <link rel="stylesheet" href="../../../assets/_markdown_exec_ansi.css">
+      <link rel="stylesheet" href="../../../../assets/_markdown_exec_ansi.css">
     
-      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../sg_gallery-binder.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-binder.css">
     
-      <link rel="stylesheet" href="../../../sg_gallery.css">
+      <link rel="stylesheet" href="../../../../sg_gallery.css">
     
-      <link rel="stylesheet" href="../../../sg_gallery-rendered-html.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-rendered-html.css">
     
-      <link rel="stylesheet" href="../../../sg_gallery-dataframe.css">
+      <link rel="stylesheet" href="../../../../sg_gallery-dataframe.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -86,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gemseo_pdfo.lib_pdfo" class="md-skip">
+        <a href="#gemseo_pdfo.settings.pdfo_bobyqa_settings" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +106,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="gemseo-pdfo" class="md-header__button md-logo" aria-label="gemseo-pdfo" data-md-component="logo">
+    <a href="../../../.." title="gemseo-pdfo" class="md-header__button md-logo" aria-label="gemseo-pdfo" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -124,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lib pdfo
+              Pdfo bobyqa settings
             
           </span>
         </div>
@@ -233,7 +235,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../.." class="md-tabs__link">
+        <a href="../../../.." class="md-tabs__link">
           
   
     
@@ -251,7 +253,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../user_guide/" class="md-tabs__link">
+      <a href="../../../../user_guide/" class="md-tabs__link">
         
   
     
@@ -270,7 +272,7 @@
   
   
     <li class="md-tabs__item md-tabs__item--active">
-      <a href="../" class="md-tabs__link">
+      <a href="../../" class="md-tabs__link">
         
   
     
@@ -304,7 +306,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="gemseo-pdfo" class="md-nav__button md-logo" aria-label="gemseo-pdfo" data-md-component="logo">
+    <a href="../../../.." title="gemseo-pdfo" class="md-nav__button md-logo" aria-label="gemseo-pdfo" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -361,7 +363,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../.." class="md-nav__link ">
+            <a href="../../../.." class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -394,7 +396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../changelog/" class="md-nav__link">
+      <a href="../../../../changelog/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -415,7 +417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../credits/" class="md-nav__link">
+      <a href="../../../../credits/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -436,7 +438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../licenses/" class="md-nav__link">
+      <a href="../../../../licenses/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -464,7 +466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../user_guide/" class="md-nav__link">
+      <a href="../../../../user_guide/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -490,6 +492,10 @@
       
         
       
+        
+          
+        
+      
     
     
       
@@ -508,7 +514,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -536,6 +542,106 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pdfo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pdfo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Settings
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Settings
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../base_pdfo_settings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Base pdfo settings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -550,7 +656,7 @@
           
   
   <span class="md-ellipsis">
-    Lib pdfo
+    Pdfo bobyqa settings
   </span>
   
 
@@ -561,7 +667,7 @@
         
   
   <span class="md-ellipsis">
-    Lib pdfo
+    Pdfo bobyqa settings
   </span>
   
 
@@ -581,17 +687,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#gemseo_pdfo.lib_pdfo" class="md-nav__link">
+  <a href="#gemseo_pdfo.settings.pdfo_bobyqa_settings" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;lib_pdfo
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;pdfo_bobyqa_settings
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" lib_pdfo">
+    <nav class="md-nav" aria-label=" pdfo_bobyqa_settings">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gemseo_pdfo.lib_pdfo-classes" class="md-nav__link">
+  <a href="#gemseo_pdfo.settings.pdfo_bobyqa_settings-classes" class="md-nav__link">
     <span class="md-ellipsis">
       Classes
     </span>
@@ -601,18 +707,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gemseo_pdfo.lib_pdfo.PDFOAlgorithmDescription" class="md-nav__link">
+  <a href="#gemseo_pdfo.settings.pdfo_bobyqa_settings.PDFO_BOBYQA_Settings" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;PDFOAlgorithmDescription
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gemseo_pdfo.lib_pdfo.PDFOOpt" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;PDFOOpt
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;PDFO_BOBYQA_Settings
     </span>
   </a>
   
@@ -631,6 +728,56 @@
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pdfo_cobyla_settings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pdfo cobyla settings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pdfo_newuoa_settings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pdfo newuoa settings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -669,17 +816,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#gemseo_pdfo.lib_pdfo" class="md-nav__link">
+  <a href="#gemseo_pdfo.settings.pdfo_bobyqa_settings" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;lib_pdfo
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;pdfo_bobyqa_settings
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" lib_pdfo">
+    <nav class="md-nav" aria-label=" pdfo_bobyqa_settings">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gemseo_pdfo.lib_pdfo-classes" class="md-nav__link">
+  <a href="#gemseo_pdfo.settings.pdfo_bobyqa_settings-classes" class="md-nav__link">
     <span class="md-ellipsis">
       Classes
     </span>
@@ -689,18 +836,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gemseo_pdfo.lib_pdfo.PDFOAlgorithmDescription" class="md-nav__link">
+  <a href="#gemseo_pdfo.settings.pdfo_bobyqa_settings.PDFO_BOBYQA_Settings" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;PDFOAlgorithmDescription
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gemseo_pdfo.lib_pdfo.PDFOOpt" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;PDFOOpt
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;PDFO_BOBYQA_Settings
     </span>
   </a>
   
@@ -734,58 +872,25 @@
   
 
 
-  <h1>Lib pdfo</h1>
+  <h1>Pdfo bobyqa settings</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<h2 id="gemseo_pdfo.lib_pdfo" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">lib_pdfo</span>
+<h2 id="gemseo_pdfo.settings.pdfo_bobyqa_settings" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">pdfo_bobyqa_settings</span>
 
 
-<a href="#gemseo_pdfo.lib_pdfo" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#gemseo_pdfo.settings.pdfo_bobyqa_settings" class="headerlink" title="Permanent link">&para;</a></h2>
 
     <div class="doc doc-contents first">
 
-        <p>PDFO optimization library wrapper, see the <a href="https://www.pdfo.net">PDFO website</a>.</p>
-
-
-
-  <div class="doc doc-children">
+        <p>Settings for the PDFO BOBYQA algorithm.</p>
 
 
 
 
-
-
-<h3 id="gemseo_pdfo.lib_pdfo-classes">Classes<a href="#gemseo_pdfo.lib_pdfo-classes" class="headerlink" title="Permanent link">&para;</a></h3>
-
-<div class="doc doc-object doc-class">
-
-
-
-<h4 id="gemseo_pdfo.lib_pdfo.PDFOAlgorithmDescription" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">PDFOAlgorithmDescription</span>
-
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
-  </span>
-
-<a href="#gemseo_pdfo.lib_pdfo.PDFOAlgorithmDescription" class="headerlink" title="Permanent link">&para;</a></h4>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PDFOAlgorithmDescription</span><span class="p">(</span>
-    <span class="n">library_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s2">&quot;PDFO&quot;</span><span class="p">,</span>
-    <span class="n">website</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s2">&quot;https://www.pdfo.net/&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-            <p class="doc doc-class-bases">
-              Bases: <code><span title="gemseo.algos.opt.base_optimization_library.OptimizationAlgorithmDescription">OptimizationAlgorithmDescription</span></code></p>
-
-
-        <p>The description of an optimization algorithm from the PDFO library.</p>
 
 
 
@@ -797,80 +902,31 @@
 
 
 
-
-
-
-
-
-  </div>
-
-    </div>
-
-</div>
+<h3 id="gemseo_pdfo.settings.pdfo_bobyqa_settings-classes">Classes<a href="#gemseo_pdfo.settings.pdfo_bobyqa_settings-classes" class="headerlink" title="Permanent link">&para;</a></h3>
 
 <div class="doc doc-object doc-class">
 
 
 
-<h4 id="gemseo_pdfo.lib_pdfo.PDFOOpt" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">PDFOOpt</span>
+<h4 id="gemseo_pdfo.settings.pdfo_bobyqa_settings.PDFO_BOBYQA_Settings" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">PDFO_BOBYQA_Settings</span>
 
 
-<a href="#gemseo_pdfo.lib_pdfo.PDFOOpt" class="headerlink" title="Permanent link">&para;</a></h4>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PDFOOpt</span><span class="p">(</span><span class="n">algo_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span>
-</code></pre></div>
+<a href="#gemseo_pdfo.settings.pdfo_bobyqa_settings.PDFO_BOBYQA_Settings" class="headerlink" title="Permanent link">&para;</a></h4>
+
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><span title="gemseo.algos.opt.base_optimization_library.BaseOptimizationLibrary">BaseOptimizationLibrary</span></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="gemseo_pdfo.settings.base_pdfo_settings.BasePDFOSettings" href="../base_pdfo_settings/#gemseo_pdfo.settings.base_pdfo_settings.BasePDFOSettings">BasePDFOSettings</a></code></p>
 
 
-        <p>PDFO optimization library interface.</p>
-<p>See OptimizationLibrary.</p>
+        <p>The PDFO BOBYQA setting.</p>
 
 
-<details class="notes" open>
-  <summary>Notes</summary>
-  <p>The missing current values
-of the :class:<code>.DesignSpace</code> attached to the :class:<code>.OptimizationProblem</code>
-are automatically initialized
-with the method :meth:<code>.DesignSpace.initialize_missing_current_values</code>.</p>
-</details>
 
 
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-          <b><code>algo_name</code></b>
-              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>)
-          –
-          <div class="doc-md-description">
-            <p>The algorithm name.</p>
-          </div>
-        </li>
-    </ul>
 
 
-<p><span class="doc-section-title">Raises:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/exceptions.html#KeyError">KeyError</a></code>
-            –
-          <div class="doc-md-description">
-            <p>When the algorithm is not in the library.</p>
-          </div>
-        </li>
-    </ul>
-
-                  <details class="quote">
-                    <summary>Source code in <code>src/gemseo_pdfo/lib_pdfo.py</code></summary>
-                    <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">algo_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># noqa: D107</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">algo_name</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;PDFO&quot;</span>
-</code></pre></div></td></tr></table></div>
-                  </details>
 
 
 
@@ -946,14 +1002,14 @@ with the method :meth:<code>.DesignSpace.initialize_missing_current_values</code
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.indexes"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.525ec568.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
-        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+        <script src="../../../../assets/_markdown_exec_pyodide.js"></script>
       
-        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="../../../../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
