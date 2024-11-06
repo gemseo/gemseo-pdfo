@@ -36,7 +36,7 @@ from numpy import nan
 from scipy.optimize import rosen
 from scipy.optimize import rosen_der
 
-from gemseo_pdfo.lib_pdfo import PDFOOpt
+from gemseo_pdfo.pdfo import PDFOOpt
 
 pytest.importorskip("pdfo", reason="pdfo is not available")
 
@@ -81,10 +81,10 @@ class TestPDFO(TestCase):
         opt_problem.objective._func = wrapped_fun
         opt_problem.stop_if_nan = False
 
-        algo_options = {"max_iter": 10000, "rhobeg": 0.1, "rhoend": 1e-6}
+        settings = {"max_iter": 10000, "rhobeg": 0.1, "rhoend": 1e-6}
 
         opt_result = execute_algo(
-            opt_problem, "PDFO_COBYLA", algo_type="opt", **algo_options
+            opt_problem, algo_name="PDFO_COBYLA", algo_type="opt", **settings
         )
 
         obj_history = opt_problem.database.get_function_history("rosen")
@@ -114,10 +114,10 @@ class TestPDFO(TestCase):
         opt_problem.objective._func = wrapped_fun
         opt_problem.stop_if_nan = False
 
-        algo_options = {"max_iter": 10000, "rhobeg": 0.1, "rhoend": 1e-6}
+        settings = {"max_iter": 10000, "rhobeg": 0.1, "rhoend": 1e-6}
 
         opt_result = execute_algo(
-            opt_problem, "PDFO_COBYLA", algo_type="opt", **algo_options
+            opt_problem, algo_name="PDFO_COBYLA", algo_type="opt", **settings
         )
 
         obj_history = opt_problem.database.get_function_history("rosen")
@@ -127,7 +127,7 @@ class TestPDFO(TestCase):
         assert pytest.approx(opt_result.x_opt[0], rel=1e-3) == 0.7
 
     def test_xtol_ftol_activation(self):
-        def run_pb(algo_options):
+        def run_pb(settings):
             design_space = DesignSpace()
             design_space.add_variable(
                 "x1", 2, DesignSpace.DesignVariableType.FLOAT, -1.0, 1.0, 0.0
@@ -135,7 +135,7 @@ class TestPDFO(TestCase):
             problem = OptimizationProblem(design_space)
             problem.objective = MDOFunction(rosen, "Rosenbrock", "obj", rosen_der)
             res = OptimizationLibraryFactory().execute(
-                problem, "PDFO_COBYLA", **algo_options
+                problem, algo_name="PDFO_COBYLA", **settings
             )
             return res, problem
 

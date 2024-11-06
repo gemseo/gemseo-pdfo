@@ -20,10 +20,7 @@ PDFO wrapper for GEMSEO
 
 ## Installation
 
-Install the latest stable version with `pip install gemseo-pdfo`.
-
-Install the development version with
-`pip install gemseo-pdfo@git+https://gitlab.com/gemseo/dev/gemseo-pdfo.git@develop`.
+Install the latest version with `pip install gemseo-pdfo`.
 
 See [pip](https://pip.pypa.io/en/stable/getting-started/) for more information.
 
