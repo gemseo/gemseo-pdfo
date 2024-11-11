@@ -26,16 +26,23 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-# Version 1.0.1 (December 2023)
+## Version 2.0.0 (November 2024)
 
-## Added
+### Added
+
+- Support GEMSEO v6.
+- Support for Python 3.12.
+
+## Version 1.0.1 (December 2023)
+
+### Added
 
 - Support for Python 3.11.
 
-## Removed
+### Removed
 
 - Support for Python 3.8.
 
-# Version 1.0.0 (June 2023)
+## Version 1.0.0 (June 2023)
 
 First version.

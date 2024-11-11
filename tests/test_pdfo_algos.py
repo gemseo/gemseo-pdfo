@@ -25,30 +25,24 @@ from unittest import TestCase
 import pytest
 from gemseo import execute_algo
 from gemseo.algos.design_space import DesignSpace
-from gemseo.algos.opt.opt_factory import OptimizersFactory
-from gemseo.algos.opt.optimization_library import OptimizationLibrary as OptLib
-from gemseo.algos.opt_problem import OptimizationProblem
-from gemseo.core.mdofunctions.mdo_function import MDOFunction
-from gemseo.problems.analytical.rosenbrock import Rosenbrock
+from gemseo.algos.opt.base_optimization_library import BaseOptimizationLibrary
+from gemseo.algos.opt.factory import OptimizationLibraryFactory
+from gemseo.algos.optimization_problem import OptimizationProblem
+from gemseo.core.mdo_functions.mdo_function import MDOFunction
+from gemseo.problems.optimization.rosenbrock import Rosenbrock
 from gemseo.utils.testing.opt_lib_test_base import OptLibraryTestBase
 from numpy import isnan
 from numpy import nan
 from scipy.optimize import rosen
 from scipy.optimize import rosen_der
 
-from gemseo_pdfo.lib_pdfo import PDFOOpt
+from gemseo_pdfo.pdfo import PDFOOpt
 
 pytest.importorskip("pdfo", reason="pdfo is not available")
 
 
 class TestPDFO(TestCase):
     OPT_LIB_NAME = "PDFOOpt"
-
-    def test_init(self):
-        """Tests the initialization of the problem."""
-        factory = OptimizersFactory()
-        if factory.is_available(self.OPT_LIB_NAME):
-            factory.create(self.OPT_LIB_NAME)
 
     def test_failed(self):
         """"""
@@ -59,14 +53,15 @@ class TestPDFO(TestCase):
             "PDFOAlgorithms",
             algo_name=algo_name,
             max_iter=10,
+            ensure_bounds=False,
         )
 
     def test_nan_handling(self):
-        """Test that an occurence of NaN value in the objective function does not stop
+        """Test that an occurrence of NaN value in the objective function does not stop
         the optimizer.
 
         In this case, a NaN "bubble" is put at the beginning of the optimizer path. In
-        this test, it is expected that the optimizer will encouter and by-pass the NaN
+        this test, it is expected that the optimizer will encounter and by-pass the NaN
         bubble.
         """
         opt_problem = Rosenbrock()
@@ -81,15 +76,15 @@ class TestPDFO(TestCase):
 
             if d < 0.05:
                 return nan
-            return fun(x_vec)
+            return fun.func(x_vec)
 
         opt_problem.objective._func = wrapped_fun
         opt_problem.stop_if_nan = False
 
-        algo_options = {"max_iter": 10000, "rhobeg": 0.1, "rhoend": 1e-6}
+        settings = {"max_iter": 10000, "rhobeg": 0.1, "rhoend": 1e-6}
 
         opt_result = execute_algo(
-            opt_problem, "PDFO_COBYLA", algo_type="opt", **algo_options
+            opt_problem, algo_name="PDFO_COBYLA", algo_type="opt", **settings
         )
 
         obj_history = opt_problem.database.get_function_history("rosen")
@@ -114,15 +109,15 @@ class TestPDFO(TestCase):
 
             if x > 0.7:
                 return nan
-            return fun(x_vec)
+            return fun.func(x_vec)
 
         opt_problem.objective._func = wrapped_fun
         opt_problem.stop_if_nan = False
 
-        algo_options = {"max_iter": 10000, "rhobeg": 0.1, "rhoend": 1e-6}
+        settings = {"max_iter": 10000, "rhobeg": 0.1, "rhoend": 1e-6}
 
         opt_result = execute_algo(
-            opt_problem, "PDFO_COBYLA", algo_type="opt", **algo_options
+            opt_problem, algo_name="PDFO_COBYLA", algo_type="opt", **settings
         )
 
         obj_history = opt_problem.database.get_function_history("rosen")
@@ -132,21 +127,23 @@ class TestPDFO(TestCase):
         assert pytest.approx(opt_result.x_opt[0], rel=1e-3) == 0.7
 
     def test_xtol_ftol_activation(self):
-        def run_pb(algo_options):
+        def run_pb(settings):
             design_space = DesignSpace()
             design_space.add_variable(
                 "x1", 2, DesignSpace.DesignVariableType.FLOAT, -1.0, 1.0, 0.0
             )
             problem = OptimizationProblem(design_space)
             problem.objective = MDOFunction(rosen, "Rosenbrock", "obj", rosen_der)
-            res = OptimizersFactory().execute(problem, "PDFO_COBYLA", **algo_options)
+            res = OptimizationLibraryFactory().execute(
+                problem, algo_name="PDFO_COBYLA", **settings
+            )
             return res, problem
 
         for tol_name in (
-            OptLib.F_TOL_ABS,
-            OptLib.F_TOL_REL,
-            OptLib.X_TOL_ABS,
-            OptLib.X_TOL_REL,
+            BaseOptimizationLibrary._F_TOL_ABS,
+            BaseOptimizationLibrary._F_TOL_REL,
+            BaseOptimizationLibrary._X_TOL_ABS,
+            BaseOptimizationLibrary._X_TOL_REL,
         ):
             res, pb = run_pb({tol_name: 1e10})
             assert tol_name in res.message
