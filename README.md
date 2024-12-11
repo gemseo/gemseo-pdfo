@@ -36,3 +36,8 @@ See the [contributing section of GEMSEO](https://gemseo.readthedocs.io/en/stable
 ## Contributors
 
 - GEMSEO developers
+
+## References
+
+Ragonneau, T.M., Zhang, Z. PDFO: a cross-platform package for Powell’s derivative-free optimization solvers.
+Math. Prog. Comp. 16, 535–559 (2024). https://doi.org/10.1007/s12532-024-00257-9
