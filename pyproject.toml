@@ -58,7 +58,7 @@ file = "README.md"
 content-type = "text/markdown"
 
 [project.entry-points]
-gemseo_plugins = { gemseo-pdfo = "gemseo_pdfo"}
+gemseo_plugins = { gemseo-pdfo = "gemseo_pdfo" }
 
 [build-system]
 requires = [
