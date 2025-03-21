@@ -38,7 +38,7 @@ fastjsonschema==2.21.1
     # via gemseo
 fonttools==4.56.0
     # via matplotlib
-gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@48e30f895f74e3587d6df5022bef8c386aab0760
+gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@13d857fbfa4d3d50aba0c5e3a49d8bb6b75c7c66
     # via
     #   -c requirements/test-constraints.in
     #   gemseo-pdfo (pyproject.toml)
@@ -48,7 +48,7 @@ ghp-import==2.1.0
     # via mkdocs
 graphviz==0.20.3
     # via gemseo
-griffe==1.6.0
+griffe==1.6.2
     # via
     #   griffe-inherited-docstrings
     #   mkdocstrings-python
@@ -90,7 +90,7 @@ markdown==3.7
     #   mkdocs-material
     #   mkdocstrings
     #   pymdown-extensions
-markdown-exec==1.10.0
+markdown-exec==1.10.2
     # via gemseo-pdfo (pyproject.toml)
 markupsafe==3.0.2
     # via
@@ -129,14 +129,12 @@ mkdocs-gallery==0.10.4
 mkdocs-gen-files==0.5.0
     # via gemseo-pdfo (pyproject.toml)
 mkdocs-get-deps==0.2.0
-    # via
-    #   mkdocs
-    #   mkdocstrings
+    # via mkdocs
 mkdocs-include-markdown-plugin==7.1.5
     # via gemseo-pdfo (pyproject.toml)
-mkdocs-literate-nav==0.6.1
+mkdocs-literate-nav==0.6.2
     # via gemseo-pdfo (pyproject.toml)
-mkdocs-material==9.6.7
+mkdocs-material==9.6.9
     # via
     #   gemseo-pdfo (pyproject.toml)
     #   mkdocs-gallery
@@ -144,11 +142,11 @@ mkdocs-material-extensions==1.3.1
     # via mkdocs-material
 mkdocs-section-index==0.3.9
     # via gemseo-pdfo (pyproject.toml)
-mkdocstrings==0.28.3
+mkdocstrings==0.29.0
     # via
     #   gemseo-pdfo (pyproject.toml)
     #   mkdocstrings-python
-mkdocstrings-python==1.16.3
+mkdocstrings-python==1.16.7
     # via mkdocstrings
 mpmath==1.3.0
     # via sympy
@@ -198,7 +196,7 @@ pillow==11.1.0
     # via
     #   gemseo
     #   matplotlib
-platformdirs==4.3.6
+platformdirs==4.3.7
     # via
     #   black
     #   mkdocs-get-deps
@@ -261,7 +259,7 @@ requests==2.32.3
     #   mkdocs-bibtex
     #   mkdocs-material
     #   responses
-responses==0.25.6
+responses==0.25.7
     # via mkdocs-bibtex
 scikit-learn==1.6.1
     # via gemseo
@@ -271,7 +269,7 @@ scipy==1.13.1
     #   pdfo
     #   pydoe3
     #   scikit-learn
-setuptools==76.0.0
+setuptools==77.0.3
     # via mkdocs-bibtex
 six==1.17.0
     # via
@@ -283,7 +281,7 @@ sympy==1.13.3
     # via gemseo
 tenacity==9.0.0
     # via plotly
-threadpoolctl==3.5.0
+threadpoolctl==3.6.0
     # via scikit-learn
 tomli==2.2.1
     # via black
