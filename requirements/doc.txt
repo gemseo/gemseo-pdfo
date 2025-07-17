@@ -10,7 +10,7 @@ black==25.1.0
     # via gemseo-pdfo (pyproject.toml:doc)
 bracex==2.6
     # via wcmatch
-certifi==2025.7.9
+certifi==2025.7.14
     # via requests
 charset-normalizer==3.4.2
     # via requests
@@ -34,9 +34,9 @@ et-xmlfile==2.0.0
     # via openpyxl
 fastjsonschema==2.21.1
     # via gemseo
-fonttools==4.58.5
+fonttools==4.59.0
     # via matplotlib
-gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@15d4ca4842bf1239416fba77afed841b8c58214a
+gemseo @ git+https://gitlab.com/gemseo/dev/gemseo.git@aa5bdf1c0c45ffe678e8db3fe7a727d01f4f81ec
     # via
     #   -c requirements/test-constraints.in
     #   gemseo-pdfo (pyproject.toml)

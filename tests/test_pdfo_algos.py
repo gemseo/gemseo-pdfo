@@ -48,7 +48,7 @@ class TestPDFO(TestCase):
         """"""
         algo_name = "PDFO_COBYLA"
         self.assertRaises(
-            Exception,
+            ValueError,
             OptLibraryTestBase.generate_error_test,
             "PDFOAlgorithms",
             algo_name=algo_name,
