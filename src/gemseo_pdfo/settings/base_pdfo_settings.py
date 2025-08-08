@@ -22,8 +22,8 @@ from gemseo.algos.opt.base_optimizer_settings import BaseOptimizerSettings
 from gemseo.utils.pydantic import copy_field
 from numpy import inf
 from pydantic import Field
-from pydantic import NonNegativeFloat  # noqa:TCH002
-from pydantic import PositiveInt  # noqa:TCH002
+from pydantic import NonNegativeFloat  # noqa:TC002
+from pydantic import PositiveInt  # noqa:TC002
 
 copy_field_opt = partial(copy_field, model=BaseOptimizerSettings)
 
@@ -49,48 +49,63 @@ class BasePDFOSettings(BaseOptimizerSettings):
 
     rhoend: NonNegativeFloat = Field(
         default=1e-6,
-        description="""The final value of the trust region radius. Indicates
-        the accuracy required in the final values of the variables.""",
+        description=(
+            "The final value of the trust region radius. "
+            "Indicates the accuracy required in the final values of the variables."
+        ),
     )
 
     ftarget: float = Field(
         default=-inf,
-        description="""The target value of the objective function. If a feasible
-        iterate achieves an objective function value lower or equal to
-        `ftarget`, the algorithm stops immediately.""",
+        description=(
+            "The target value of the objective function. "
+            "If a feasible iterate achieves an objective function value "
+            "lower or equal to ``ftarget``, the algorithm stops immediately."
+        ),
     )
+
     scale: bool = Field(
         default=False,
-        description="""The flag indicating whether to scale the problem according to
-        the bound constraints.""",
+        description=(
+            "The flag indicating whether to scale the problem "
+            "according to the bound constraints."
+        ),
     )
 
     quiet: bool = Field(
         default=True,
-        description="""The flag of quietness of the interface. If True,
-        the output message will not be printed.""",
+        description=(
+            "The flag of quietness of the interface. "
+            "If ``True``, the output message will not be printed."
+        ),
     )
 
     classical: bool = Field(
         default=False,
-        description="""The flag indicating whether to call the classical Powell
-                    code or not.""",
+        description=(
+            "The flag indicating whether to call the classical Powell code or not."
+        ),
     )
 
     debug: bool = Field(default=False, description="The debugging flag.")
 
     chkfunval: bool = Field(
         default=False,
-        description=""" A flag used when debugging. If both `debug`
-        and `chkfunval` are True, an extra function/constraint
-        evaluation would be performed to check whether the returned values of
-        the objective function and constraint match the returned x.""",
+        description=(
+            "A flag used when debugging. "
+            "If both ``debug`` and ``chkfunval`` are ``True``, "
+            "an extra function/constraint evaluation is performed "
+            "to check whether the returned values of the objective function "
+            "and constraint match the returned x."
+        ),
     )
 
     ensure_bounds: bool = Field(
         default=True,
-        description="""Whether to project the design vector
-        onto the design space before execution.""",
+        description=(
+            "Whether to project the design vector onto the design space "
+            "before execution."
+        ),
     )
 
     normalize_design_space: bool = (
