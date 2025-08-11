@@ -2,54 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/changelog/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/credits/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/licenses/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/reference/SUMMARY/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/reference/gemseo_pdfo/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/reference/gemseo_pdfo/pdfo/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/reference/gemseo_pdfo/settings/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/reference/gemseo_pdfo/settings/base_pdfo_settings/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/reference/gemseo_pdfo/settings/pdfo_bobyqa_settings/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/reference/gemseo_pdfo/settings/pdfo_cobyla_settings/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/reference/gemseo_pdfo/settings/pdfo_newuoa_settings/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://gemseo.gitlab.io/gemseo-pdfo/latest/user_guide/</loc>
-         <lastmod>2025-08-10</lastmod>
+         <lastmod>2025-08-11</lastmod>
     </url>
 </urlset>
