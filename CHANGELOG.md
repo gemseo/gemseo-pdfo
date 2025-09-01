@@ -26,6 +26,12 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Version 2.0.2 (September 2025)
+
+### Fixed
+
+- The default value of the `normalize_design_space` setting.
+
 ## Version 2.0.1 (August 2025)
 
 ### Added

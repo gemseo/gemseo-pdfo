@@ -108,6 +108,6 @@ class BasePDFOSettings(BaseOptimizerSettings):
         ),
     )
 
-    normalize_design_space: bool = (
-        copy_field_opt("normalize_design_space", default=True),
+    normalize_design_space: bool = copy_field_opt(
+        "normalize_design_space", default=True
     )
