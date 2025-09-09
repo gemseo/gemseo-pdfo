@@ -25,7 +25,6 @@ from unittest import TestCase
 import pytest
 from gemseo import execute_algo
 from gemseo.algos.design_space import DesignSpace
-from gemseo.algos.opt.base_optimization_library import BaseOptimizationLibrary
 from gemseo.algos.opt.factory import OptimizationLibraryFactory
 from gemseo.algos.optimization_problem import OptimizationProblem
 from gemseo.core.mdo_functions.mdo_function import MDOFunction
@@ -140,10 +139,10 @@ class TestPDFO(TestCase):
             return res, problem
 
         for tol_name in (
-            BaseOptimizationLibrary._F_TOL_ABS,
-            BaseOptimizationLibrary._F_TOL_REL,
-            BaseOptimizationLibrary._X_TOL_ABS,
-            BaseOptimizationLibrary._X_TOL_REL,
+            "ftol_abs",
+            "ftol_rel",
+            "xtol_abs",
+            "xtol_rel",
         ):
             res, pb = run_pb({tol_name: 1e10})
             assert tol_name in res.message
