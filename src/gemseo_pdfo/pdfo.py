@@ -103,18 +103,17 @@ class PDFOOpt(BaseOptimizationLibrary):
         super().__init__(algo_name)
         self.name = "PDFO"
 
-    def _run(self, problem: OptimizationProblem, **settings: Any) -> tuple[str, Any]:
-        # Filter settings to get only the ones of the PDFO optimizer
-        settings_ = self._filter_settings(settings, BaseOptimizerSettings)
-
+    def _run(self, problem: OptimizationProblem) -> tuple[str, Any]:
         # Get the normalized bounds:
-        x_0, l_b, u_b = get_value_and_bounds(problem.design_space, self._normalize_ds)
+        x_0, l_b, u_b = get_value_and_bounds(
+            problem.design_space, self._settings.normalize_design_space
+        )
 
         # Replace infinite values with None:
         l_b = [val if isfinite(val) else None for val in l_b]
         u_b = [val if isfinite(val) else None for val in u_b]
 
-        ensure_bounds = settings_["ensure_bounds"]
+        ensure_bounds = self._settings.ensure_bounds
 
         cstr_pdfo = []
         for cstr in self._get_right_sign_constraints(problem):
@@ -126,10 +125,15 @@ class PDFOOpt(BaseOptimizationLibrary):
 
             cstr_pdfo.append(c_pdfo)
 
+        # Filter settings to get only the ones of the PDFO optimizer
+        settings_ = self._filter_settings(
+            self._settings.model_dump(), BaseOptimizerSettings
+        )
+
         # |g| is in charge of ensuring max iterations, since it may
         # have a different definition of iterations, such as for SLSQP
         # for instance which counts duplicate calls to x as a new iteration
-        settings_["maxfev"] = int(settings["max_iter"] * 1.2)
+        settings_["maxfev"] = int(self._settings.max_iter * 1.2)
 
         def real_part_fun(
             x: ndarray,
@@ -147,7 +151,7 @@ class PDFOOpt(BaseOptimizationLibrary):
         def ensure_bounds_fun(x_vect):
             return real_part_fun(
                 self._problem.design_space.project_into_bounds(
-                    x_vect, self._normalize_ds
+                    x_vect, self._settings.normalize_design_space
                 )
             )
 
@@ -178,7 +182,7 @@ class PDFOOpt(BaseOptimizationLibrary):
         def wrapped_func(x_vect):
             return orig_func(
                 self._problem.design_space.project_into_bounds(
-                    x_vect, self._normalize_ds
+                    x_vect, self._settings.normalize_design_space
                 )
             )
 
