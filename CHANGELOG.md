@@ -26,6 +26,12 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Fixed
+
+- Fixed an issue with the `PDFO_COBYLA_Settings` class that prevented the algorithm from being initialized correctly.
+
 ## Version 2.0.2 (September 2025)
 
 ### Fixed

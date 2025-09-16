@@ -36,6 +36,7 @@ from scipy.optimize import rosen
 from scipy.optimize import rosen_der
 
 from gemseo_pdfo.pdfo import PDFOOpt
+from gemseo_pdfo.settings.pdfo_cobyla_settings import PDFO_COBYLA_Settings
 
 pytest.importorskip("pdfo", reason="pdfo is not available")
 
@@ -80,10 +81,12 @@ class TestPDFO(TestCase):
         opt_problem.objective._func = wrapped_fun
         opt_problem.stop_if_nan = False
 
-        settings = {"max_iter": 10000, "rhobeg": 0.1, "rhoend": 1e-6}
+        pdfo_cobyla_settings = PDFO_COBYLA_Settings(
+            max_iter=10000, rhobeg=0.1, rhoend=1e-6
+        )
 
         opt_result = execute_algo(
-            opt_problem, algo_name="PDFO_COBYLA", algo_type="opt", **settings
+            opt_problem, algo_type="opt", settings_model=pdfo_cobyla_settings
         )
 
         obj_history = opt_problem.database.get_function_history("rosen")
@@ -93,7 +96,7 @@ class TestPDFO(TestCase):
         assert opt_result.f_opt < 1e-3
 
     def test_nan_handling_2(self):
-        """Test that an occurence of NaN value in the objective function does not stop
+        """Test that an occurrence of NaN value in the objective function does not stop
         the optimizer.
 
         In this test, all the values of x>0.7 are not realizable. The optimum is then
@@ -113,10 +116,12 @@ class TestPDFO(TestCase):
         opt_problem.objective._func = wrapped_fun
         opt_problem.stop_if_nan = False
 
-        settings = {"max_iter": 10000, "rhobeg": 0.1, "rhoend": 1e-6}
+        pdfo_cobyla_settings = PDFO_COBYLA_Settings(
+            max_iter=10000, rhobeg=0.1, rhoend=1e-6
+        )
 
         opt_result = execute_algo(
-            opt_problem, algo_name="PDFO_COBYLA", algo_type="opt", **settings
+            opt_problem, algo_type="opt", settings_model=pdfo_cobyla_settings
         )
 
         obj_history = opt_problem.database.get_function_history("rosen")
