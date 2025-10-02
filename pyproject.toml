@@ -21,7 +21,7 @@ classifiers = [
 dynamic = ["version"]
 requires-python = ">=3.10, <3.13"
 dependencies = [
-    "gemseo[all] >=6,<7",
+    "gemseo[all] >=6.3,<7",
     # Workaround pdfo not compatible with numpy 2.
     "numpy <2",
     "pdfo >=1.0.0,<=2.2.0",
