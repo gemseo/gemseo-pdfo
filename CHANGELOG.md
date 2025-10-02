@@ -28,6 +28,10 @@ and this project adheres to
 
 ## Unreleased
 
+### Removed
+
+- Support for python 3.9.
+
 ### Fixed
 
 - Fixed an issue with the `PDFO_COBYLA_Settings` class that prevented the algorithm from being initialized correctly.

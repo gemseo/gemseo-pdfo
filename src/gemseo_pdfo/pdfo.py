@@ -24,11 +24,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 from typing import Any
-from typing import Callable
 from typing import ClassVar
 from typing import Final
-from typing import Optional
-from typing import Union
 
 from gemseo.algos.design_space_utils import get_value_and_bounds
 from gemseo.algos.opt.base_optimization_library import BaseOptimizationLibrary
@@ -45,9 +42,11 @@ from gemseo_pdfo.settings.pdfo_cobyla_settings import PDFO_COBYLA_Settings
 from gemseo_pdfo.settings.pdfo_newuoa_settings import PDFO_NEWUOA_Settings
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
     from gemseo.algos.optimization_problem import OptimizationProblem
 
-OptionType = Optional[Union[str, int, float, bool, ndarray]]
+OptionType = str | int | float | bool | ndarray
 
 
 @dataclass
@@ -159,7 +158,7 @@ class PDFOOpt(BaseOptimizationLibrary):
             fun=ensure_bounds_fun if ensure_bounds else real_part_fun,
             x0=x_0,
             method=self.ALGORITHM_INFOS[self._algo_name].internal_algorithm_name,
-            bounds=list(zip(l_b, u_b)),
+            bounds=list(zip(l_b, u_b, strict=False)),
             constraints=cstr_pdfo,
             options=settings_,
         )
