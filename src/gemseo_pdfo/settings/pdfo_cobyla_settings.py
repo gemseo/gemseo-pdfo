@@ -22,4 +22,4 @@ from gemseo_pdfo.settings.base_pdfo_settings import BasePDFOSettings
 class PDFO_COBYLA_Settings(BasePDFOSettings):  # noqa: N801
     """The PDFO COBYLA setting."""
 
-    _TARGET_CLASS_NAME = "COBYLA"
+    _TARGET_CLASS_NAME = "PDFO_COBYLA"
