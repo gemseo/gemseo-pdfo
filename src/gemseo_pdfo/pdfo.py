@@ -27,10 +27,11 @@ from typing import Any
 from typing import ClassVar
 from typing import Final
 
-from gemseo.space.util import get_value_and_bounds
 from gemseo.optimization.core.base_optimization_library import BaseOptimizationLibrary
-from gemseo.optimization.core.base_optimization_library import OptimizationAlgorithmDescription
-from gemseo.optimization.core.base_optimizer_settings import BaseOptimizerSettings
+from gemseo.optimization.core.base_optimization_library import (
+    OptimizationAlgorithmDescription,
+)
+from gemseo.space.util import get_value_and_bounds
 from numpy import isfinite
 from numpy import ndarray
 from numpy import real
@@ -80,19 +81,22 @@ class PDFOOpt(BaseOptimizationLibrary):
             internal_algorithm_name="cobyla",
             positive_constraints=True,
             website=f"{__DOC}",
-            settings_class=PDFO_COBYLA_Settings),
+            settings_class=PDFO_COBYLA_Settings,
+        ),
         "PDFO_BOBYQA": PDFOAlgorithmDescription(
             algorithm_name="BOBYQA",
             description="Bound Optimization By Quadratic Approximation",
             internal_algorithm_name="bobyqa",
             website=f"{__DOC}",
-            settings_class=PDFO_BOBYQA_Settings),
+            settings_class=PDFO_BOBYQA_Settings,
+        ),
         "PDFO_NEWUOA": PDFOAlgorithmDescription(
             algorithm_name="NEWUOA",
             description="NEWUOA",
             internal_algorithm_name="newuoa",
             website=f"{__DOC}",
-            settings_class=PDFO_NEWUOA_Settings),
+            settings_class=PDFO_NEWUOA_Settings,
+        ),
     }
 
     def __init__(self, algo_name: str) -> None:  # noqa: D107
@@ -100,10 +104,8 @@ class PDFOOpt(BaseOptimizationLibrary):
         self.name = "PDFO"
 
     def _run(self, problem: OptimizationProblem) -> tuple[str, Any]:
-        # Get the normalized bounds:
-        # TODO(bump-gemseo): get_value_and_bounds returns the value and the bounds of the space it is passed as they are; in a driver library, problem.input_space is the working space, already normalized when normalize_design_space is set, so pass it and map a point back to the coordinates the user declared with self._transformation.inverse_transform_value(x), always, rather than with unnormalize_vect guarded by normalize_design_space, which would map it twice (see gemseo.space.transformation)  # noqa: E501
-        x_0, l_b, u_b = get_value_and_bounds(
-            problem.design_space)
+        # The working space is already normalized when normalize_design_space is set.
+        x_0, l_b, u_b = get_value_and_bounds(problem.input_space)
 
         # Replace infinite values with None:
         l_b = [val if isfinite(val) else None for val in l_b]
@@ -122,10 +124,7 @@ class PDFOOpt(BaseOptimizationLibrary):
             cstr_pdfo.append(c_pdfo)
 
         # Filter settings to get only the ones of the PDFO optimizer
-        # TODO(bump-gemseo): _filter_settings() now dumps self._settings by field name, not by alias; filter the mapping yourself if it was not self._settings.model_dump()  # noqa: E501
-        # TODO(bump-gemseo): _filter_settings() now excludes the fields of the classes of _settings_class_to_exclude and _additional_settings_classes_to_exclude; set these class attributes if model_to_exclude was another class  # noqa: E501
-        settings_ = self._filter_settings(
-            )
+        settings_ = self._filter_settings()
 
         # |g| is in charge of ensuring max iterations, since it may
         # have a different definition of iterations, such as for SLSQP
@@ -146,11 +145,7 @@ class PDFOOpt(BaseOptimizationLibrary):
             return real(problem.objective.evaluate(x))
 
         def ensure_bounds_fun(x_vect):
-            return real_part_fun(
-                self._problem.input_space.project_into_bounds(
-                    x_vect, self._settings.normalize_design_space
-                )
-            )
+            return real_part_fun(self._problem.input_space.project_into_bounds(x_vect))
 
         opt_result = pdfo(
             fun=ensure_bounds_fun if ensure_bounds else real_part_fun,
@@ -177,10 +172,6 @@ class PDFOOpt(BaseOptimizationLibrary):
         """
 
         def wrapped_func(x_vect):
-            return orig_func(
-                self._problem.input_space.project_into_bounds(
-                    x_vect, self._settings.normalize_design_space
-                )
-            )
+            return orig_func(self._problem.input_space.project_into_bounds(x_vect))
 
         return wrapped_func

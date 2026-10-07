@@ -21,6 +21,3 @@ from gemseo_pdfo.settings.base_pdfo_settings import BasePDFOSettings
 
 class PDFO_NEWUOA_Settings(BasePDFOSettings):  # noqa: N801
     """The PDFO NEWUOA setting."""
-
-    # TODO(bump-gemseo): read it with the target_class_name property of a settings instance; in a settings class, the value is now derived from the name of the class (X_Settings targets X), so remove the assignment if its value is the name of the class without _Settings, else rename the class to <value>_Settings first, or it would target another class  # noqa: E501
-    _TARGET_CLASS_NAME = "NEWUOA"

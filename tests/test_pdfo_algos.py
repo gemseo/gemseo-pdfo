@@ -24,11 +24,11 @@ from unittest import TestCase
 
 import pytest
 from gemseo import execute_algo
-from gemseo.space import DesignSpace
-from gemseo.optimization.factory import OptimizationLibraryFactory
-from gemseo.optimization import OptimizationProblem
 from gemseo.core.function.array_function import ArrayFunction
+from gemseo.optimization import OptimizationProblem
+from gemseo.optimization.factory import OptimizationLibraryFactory
 from gemseo.problem.optimization.rosenbrock import Rosenbrock
+from gemseo.space import DesignSpace
 from gemseo.util.testing.opt_lib_test_base import OptLibraryTestBase
 from numpy import isnan
 from numpy import nan
@@ -138,9 +138,8 @@ class TestPDFO(TestCase):
             )
             problem = OptimizationProblem(design_space)
             problem.objective = ArrayFunction(rosen, "Rosenbrock", "obj", rosen_der)
-            # TODO(bump-gemseo): **kwargs may contain: settings_model -> settings  # noqa: E501
             res = OptimizationLibraryFactory().execute(
-                problem, settings=PDFO_COBYLA_Settings(), **settings
+                problem, settings=PDFO_COBYLA_Settings(**settings)
             )
             return res, problem
 
