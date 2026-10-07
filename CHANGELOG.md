@@ -26,6 +26,25 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Changed
+
+- Support for GEMSEO 7.
+- The `numpy<2` requirement is removed,
+  as `gemseo[all]` 7 requires NumPy 2.
+
+### Removed
+
+- Support for Python 3.10.
+
+### Fixed
+
+- `PDFO_BOBYQA_Settings` and `PDFO_NEWUOA_Settings` can be used as settings models,
+  instead of raising an error about the unknown algorithms `BOBYQA` and `NEWUOA`.
+- An unbounded design variable is no longer projected onto [0, 1]
+  when `ensure_bounds` and `normalize_design_space` are `True`.
+
 ## Version 2.0.3 (October 2025)
 
 ### Removed
