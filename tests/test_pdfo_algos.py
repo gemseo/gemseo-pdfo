@@ -30,6 +30,7 @@ from gemseo.optimization.factory import OptimizationLibraryFactory
 from gemseo.problem.optimization.rosenbrock import Rosenbrock
 from gemseo.space import DesignSpace
 from gemseo.util.testing.opt_lib_test_base import OptLibraryTestBase
+from numpy import inf
 from numpy import isnan
 from numpy import nan
 from scipy.optimize import rosen
@@ -179,3 +180,21 @@ for test_method in suite_tests.generate_test("PDFOOpt", get_options, get_pb_opti
 def test_library_name():
     """Check the library name."""
     assert PDFOOpt.LIBRARY_NAME == "PDFO"
+
+
+@pytest.mark.parametrize("ensure_bounds", [False, True])
+def test_unbounded_variable(ensure_bounds):
+    """Check that an unbounded variable is not projected onto [0, 1].
+
+    The working space normalizes only the bounded variables.
+    """
+    design_space = DesignSpace()
+    design_space.add_variable("x", lower_bound=-inf, upper_bound=inf, value=0.0)
+    design_space.add_variable("y", lower_bound=-1.0, upper_bound=1.0, value=0.5)
+    problem = OptimizationProblem(design_space)
+    problem.objective = ArrayFunction(lambda x: (x[0] - 5.0) ** 2 + x[1] ** 2, "f")
+    result = execute_algo(
+        problem,
+        settings_model=PDFO_COBYLA_Settings(max_iter=500, ensure_bounds=ensure_bounds),
+    )
+    assert result.x_opt == pytest.approx([5.0, 0.0], abs=1e-4)
