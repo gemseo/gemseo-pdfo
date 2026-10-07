@@ -18,8 +18,8 @@ from __future__ import annotations
 
 from functools import partial
 
-from gemseo.algos.opt.base_optimizer_settings import BaseOptimizerSettings
-from gemseo.utils.pydantic import copy_field
+from gemseo.optimization.core.base_optimizer_settings import BaseOptimizerSettings
+from gemseo.util.pydantic import copy_field
 from numpy import inf
 from pydantic import Field
 from pydantic import NonNegativeFloat  # noqa:TC002
