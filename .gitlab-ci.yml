@@ -1,9 +1,10 @@
 include:
   - remote: "https://gitlab.com/gemseo/dev/ci-includes/-/raw/4/main.yml"
 
+variables:
+  __PY_VERSION_MIN: 311
 
 # Remove this once 313 is supported by pdfo.
 .test-all-py-versions:
-  - $__PY_VERSION_MIN
   - 311
   - 312
