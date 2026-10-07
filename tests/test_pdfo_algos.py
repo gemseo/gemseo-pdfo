@@ -24,12 +24,12 @@ from unittest import TestCase
 
 import pytest
 from gemseo import execute_algo
-from gemseo.algos.design_space import DesignSpace
-from gemseo.algos.opt.factory import OptimizationLibraryFactory
-from gemseo.algos.optimization_problem import OptimizationProblem
-from gemseo.core.mdo_functions.mdo_function import MDOFunction
-from gemseo.problems.optimization.rosenbrock import Rosenbrock
-from gemseo.utils.testing.opt_lib_test_base import OptLibraryTestBase
+from gemseo.space import DesignSpace
+from gemseo.optimization.factory import OptimizationLibraryFactory
+from gemseo.optimization import OptimizationProblem
+from gemseo.core.function.array_function import ArrayFunction
+from gemseo.problem.optimization.rosenbrock import Rosenbrock
+from gemseo.util.testing.opt_lib_test_base import OptLibraryTestBase
 from numpy import isnan
 from numpy import nan
 from scipy.optimize import rosen
@@ -134,12 +134,13 @@ class TestPDFO(TestCase):
         def run_pb(settings):
             design_space = DesignSpace()
             design_space.add_variable(
-                "x1", 2, DesignSpace.DesignVariableType.FLOAT, -1.0, 1.0, 0.0
+                "x1", 2, DesignSpace.DesignVariableType.REAL, -1.0, 1.0, 0.0
             )
             problem = OptimizationProblem(design_space)
-            problem.objective = MDOFunction(rosen, "Rosenbrock", "obj", rosen_der)
+            problem.objective = ArrayFunction(rosen, "Rosenbrock", "obj", rosen_der)
+            # TODO(bump-gemseo): **kwargs may contain: settings_model -> settings  # noqa: E501
             res = OptimizationLibraryFactory().execute(
-                problem, algo_name="PDFO_COBYLA", **settings
+                problem, settings=PDFO_COBYLA_Settings(), **settings
             )
             return res, problem
 
