@@ -1,11 +1,11 @@
 site_name: gemseo-pdfo
-site_url: https://gemseo.gitlab.io/gemseo-pdfo
+site_url: https://gemseo.gitlab.io/dev/gemseo-pdfo
 repo_url: https://gitlab.com/gemseo/dev/gemseo-pdfo
 repo_name: gemseo-pdfo
 
 theme:
   name: material
-  favicon: images/favicon.ico
+  favicon: images/monogram.png
   features:
     - navigation.tabs
     - navigation.instant
@@ -107,7 +107,6 @@ markdown_extensions:
 
 extra_javascript:
 - javascripts/mathjax.js
-- https://polyfill.io/v3/polyfill.min.js?features=es6
 - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 watch:
